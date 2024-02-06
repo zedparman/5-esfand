@@ -1,33 +1,7 @@
-import { z } from "zod";
 import * as yup from "yup";
 
 const passwordRules = /^(?=.*[A-Z])(?=.*\d).{8,}$/;
-// const validateSchemaSignUp = (t) => {
-//   const signUpFormSchema = z
-//     .object({
-//       name: z
-//         .string({ required_error: t.userNameRequire })
-//         .min(3, t.userNameValidateLong),
-//       lastName: z
-//         .string({ required_error: t.lastNameRequire })
-//         .min(3, t.lastNameValidateLong),
-//       email: z
-//         .string({ required_error: t.emailRequire })
-//         .email(t.emailValidate),
-//       password: z
-//         .string({ required_error: t.passwordRequire })
-//         .min(8, t.passwordvalidate),
-//       confrimPassword: z
-//         .string({ required_error: t.confrimPasswordRequire })
-//         .min(8, t.confrimPassword),
-//     })
-//     .refine((data) => data.password === data.confrimPassword, {
-//       message: t.passMatch,
-//       path: ["confirmPassword"],
-//     });
 
-//   return signUpFormSchema;
-// };
 const validateSchemaSignUp = (t) => {
   const signUpFormSchema = yup.object().shape({
     name: yup
@@ -70,6 +44,42 @@ const validateSchemaChangeAccountDetails = (t) => {
   });
   return signUpFormSchema;
 };
+const validateSchemaCreateQuestion = (t) => {
+  const signUpFormSchema = yup.object().shape({
+    inpTitle: yup
+      .string()
+      .min(3, t.inpTitleValidateLong)
+      .required(t.inpTitleRequire),
+    inpSubTitle: yup
+      .string()
+      .min(3, t.inpSubValidateLong)
+      .required(t.inpSubRequire),
+  });
+  return signUpFormSchema;
+};
+const validateSchemaChangePassword = (t) => {
+  const signUpFormSchema = yup.object().shape({
+    currentPassword: yup
+      .string()
+      .matches(passwordRules, {
+        message: t.passRules,
+      })
+      .min(8, t.passwordvalidate)
+      .required(t.passwordRequire),
+    password: yup
+      .string()
+      .matches(passwordRules, {
+        message: t.passRules,
+      })
+      .min(8, t.passwordvalidate)
+      .required(t.passwordRequire),
+    confrimPassword: yup
+      .string()
+      .oneOf([yup.ref("password")], t.passMatch)
+      .required(t.confrimPasswordRequire),
+  });
+  return signUpFormSchema;
+};
 const validateSchemaSignIn = (t) => {
   const signUpFormSchema = yup.object().shape({
     email: yup.string().email(t.emailValidate).required(t.emailRequire),
@@ -84,4 +94,10 @@ const validateSchemaSignIn = (t) => {
   return signUpFormSchema;
 };
 
-export { validateSchemaSignUp, validateSchemaSignIn , validateSchemaChangeAccountDetails };
+export {
+  validateSchemaSignUp,
+  validateSchemaSignIn,
+  validateSchemaChangeAccountDetails,
+  validateSchemaChangePassword,
+  validateSchemaCreateQuestion
+};

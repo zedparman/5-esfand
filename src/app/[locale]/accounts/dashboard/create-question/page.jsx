@@ -1,3 +1,7 @@
+import CreateQuestionComponent from "@/app/[locale]/components/CreateQuestion/CreateQuestionComponent";
+import { useMessages } from "next-intl";
+
 export default function CreateQuestion() {
-  return <h1>create question</h1>;
+  const t = useMessages("Dashboard");
+  return <CreateQuestionComponent t={t.Dashboard.CreateQuestionPage} />;
 }

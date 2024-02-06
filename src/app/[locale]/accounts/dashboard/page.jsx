@@ -3,7 +3,8 @@ import { redirect } from "@/navigations";
 import { getServerSession } from "next-auth";
 import React from "react";
 
-export default async function DashboardPage() {
+export default async function DashboardPage({ session }) {
+  
   // const auth = async () => {
   //   "use server";
   //   const sesseoin = await getServerSession(authOptions);

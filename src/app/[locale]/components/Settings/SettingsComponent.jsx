@@ -8,7 +8,7 @@ const SettingsComponent = () => {
   return (
     <section className="space-y-5">
       <ChangeAccountDetails t={t.Dashboard.SettingsPage} />
-      <ChenagePassword t={t.Dashboard.SettingsPage} />
+      <ChenagePassword t={t.Dashboard.SettingsPage.ChenagePassword} />
     </section>
   );
 };

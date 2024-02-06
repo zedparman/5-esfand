@@ -42,9 +42,9 @@ const ChangeAccountDetails = ({ t }) => {
   });
   return (
     <div className="flex flex-col">
-      <h1>{t.title}</h1>
+      <h1 className="text-2xl font-bold">{t.title}</h1>
       <form
-        className="flex flex-col gap-5 w-full "
+        className="flex flex-col my-5 gap-5 w-full "
         onSubmit={formik.handleSubmit}
       >
         <div className="space-y-2">

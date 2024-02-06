@@ -9,10 +9,11 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { revalidatePath } from "next/cache";
+import { useRouter } from "next/navigation";
 
 const SignUpComponent = ({ t }) => {
   const schemaValidate = validateSchemaSignUp(t);
-
+  const router = useRouter();
   const formik = useFormik({
     initialValues: {
       name: "",
