@@ -3,7 +3,7 @@ import DashboardNav from "../../components/Nav/DashboardNav";
 
 export default function DashboardLayout({ children }) {
   const t = useMessages();
-  console.log(t);
+
   return (
     <div className="flex flex-col space-y-6 mt-10 ">
       <div className="container grid flex-1 gap-12 md:grid-cols-[200px_1fr]">
