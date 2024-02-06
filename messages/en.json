@@ -26,5 +26,35 @@
     "confrimPassword": "Confrim Password must be 8 or more characters long",
     "passMatch": "password and confirm password do not match.",
     "passRules": "The password must have at least 8 characters and one uppercase letter and one number"
+  },
+  "SignIn": {
+    "title": "Sign In",
+    "subTitle": "Dear user, you can easily sign in to your account",
+    "email": "Email",
+    "name": "Name",
+    "lastName": "Last Name",
+    "password": "Password",
+    "retypePassword": "Retype Password",
+    "submit": "Sign In",
+    "userNameRequire": "User name is required",
+    "lastNameRequire": "Last name is required",
+    "userNameValidateLong": "User name must be 3 or more characters long",
+    "lastNameValidateLong": "User lastName must be 3 or more characters long",
+    "emailRequire": "Email is required",
+    "emailValidate": "Please enter a valid email",
+    "passwordvalidate": "Password must be 8 or more characters long",
+    "passwordRequire": "Password is required",
+    "confrimPasswordRequire": "Confrim Password is required",
+    "confrimPassword": "Confrim Password must be 8 or more characters long",
+    "passMatch": "password and confirm password do not match.",
+    "passRules": "The password must have at least 8 characters and one uppercase letter and one number"
+  },
+
+  "Dashboard": {
+    "Home": "Home",
+    "CreateQuestion": "Create Question",
+    "Settings": "Settings",
+    "QuestionsList": "Question List",
+    "LogOut" : "Log Out"
   }
 }

@@ -30,7 +30,7 @@ const SideNav = () => {
           <SheetTitle>Question Area</SheetTitle>
         </SheetHeader>
         <div className="flex flex-col gap-4 py-4">
-          <Link href={"/auth/signin"}>{t("signIn")}</Link>
+          <Link href={"/signin"}>{t("signIn")}</Link>
           <Link href={"/signup"}>{t("signUp")}</Link>
           <Link href={"/questions"}>{t("questions")}</Link>
         </div>

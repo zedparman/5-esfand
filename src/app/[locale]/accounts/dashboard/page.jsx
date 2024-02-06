@@ -1,7 +1,20 @@
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { redirect } from "@/navigations";
+import { getServerSession } from "next-auth";
 import React from "react";
 
-const DashboardPage = () => {
-  return <div>DashboardPage</div>;
-};
+export default async function DashboardPage() {
+  // const auth = async () => {
+  //   "use server";
+  //   const sesseoin = await getServerSession(authOptions);
 
-export default DashboardPage;
+  //   return sesseoin ? sesseoin.user : false;
+  // };
+
+  // const user = await auth();
+  // if (!user) {
+  //   redirect("/signin");
+  // }
+  // console.log(user);
+  return <div>DashboardPage</div>;
+}

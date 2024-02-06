@@ -1,9 +1,11 @@
-import React from 'react'
+import React from "react";
+import { useMessages } from "next-intl";
+import SignInComponent from "../../components/SignIn/SignInComponent";
 
 const SignInPage = () => {
-  return (
-    <div>SignInPage</div>
-  )
-}
+  const t = useMessages("SignIn");
 
-export default SignInPage
+  return <SignInComponent t={t.SignIn} />;
+};
+
+export default SignInPage;

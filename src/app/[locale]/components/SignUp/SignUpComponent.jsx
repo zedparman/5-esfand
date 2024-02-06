@@ -8,6 +8,7 @@ import { useFormik } from "formik";
 import React from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
+import { revalidatePath } from "next/cache";
 
 const SignUpComponent = ({ t }) => {
   const schemaValidate = validateSchemaSignUp(t);
@@ -39,6 +40,11 @@ const SignUpComponent = ({ t }) => {
         }
       );
       console.log(res);
+      if (res.status !== 200) {
+        console.log(res.error);
+      }
+      router.push("/accounts/dashboard");
+      router.refresh();
     },
   });
   return (

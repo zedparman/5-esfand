@@ -53,5 +53,18 @@ const validateSchemaSignUp = (t) => {
   });
   return signUpFormSchema;
 };
+const validateSchemaSignIn = (t) => {
+  const signUpFormSchema = yup.object().shape({
+    email: yup.string().email(t.emailValidate).required(t.emailRequire),
+    password: yup
+      .string()
+      .matches(passwordRules, {
+        message: t.passRules,
+      })
+      .min(8, t.passwordvalidate)
+      .required(t.passwordRequire),
+  });
+  return signUpFormSchema;
+};
 
-export { validateSchemaSignUp };
+export { validateSchemaSignUp , validateSchemaSignIn };

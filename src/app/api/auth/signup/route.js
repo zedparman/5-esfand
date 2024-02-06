@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server";
-import connectDb from "../../../../../utils/connectDB";
+import connectDb from "../../../../utils/connectDB";
 import validator from "validator";
 import User from "@/models/User";
-import { generateHashPassword } from "../../../../../utils/auth";
+import { generateHashPassword } from "../../../../utils/auth";
 
 export async function POST(req, res) {
   try {
