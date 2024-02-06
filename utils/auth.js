@@ -4,8 +4,8 @@ const generateHashPassword = async (password) => {
   return hashPassword;
 };
 
-const verifyPassword = (password, hashPassword) => {
-  const isValid = bcrypt.compare(password, hashPassword);
+const verifyPassword = async (password, hashPassword) => {
+  const isValid = await bcrypt.compare(password, hashPassword);
   return isValid;
 };
 

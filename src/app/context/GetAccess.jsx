@@ -6,6 +6,7 @@ import { redirect } from "@/navigations";
 
 const GetAccess = async ({ children }) => {
   const session = await getServerSession(authOptions);
+
   if (session == null) {
     redirect("/signin");
   }

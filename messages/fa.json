@@ -25,7 +25,8 @@
     "confrimPasswordRequire": "تکرار رمز عبور الزامی است",
     "confrimPassword": "تکرار رمز عبور باید حداقل 8 کاراکتر باشد",
     "passMatch": "رمز عبور و تکرار رمز عبور باهم یکسان نیستند",
-    "passRules": "پسوورد باید دارای حداقل 8 کاراکتر و یک حرف بزرگ و یک عدد باشد"
+    "passRules": "پسوورد باید دارای حداقل 8 کاراکتر و یک حرف بزرگ و یک عدد باشد",
+    "CheangeDetails": "تغییر"
   },
   "SignIn": {
     "title": "ورود",
@@ -55,7 +56,21 @@
     "CreateQuestion": "ساخت سوال",
     "Settings": "تنظیمات",
     "QuestionsList": "لیست سوالات",
-    "LogOut" : "خروج"
-
+    "LogOut": "خروج",
+    "SettingsPage": {
+      "title": "تغییر اطلاعات اکانت",
+      "name": "نام",
+      "lastName": "نام خانوادگی",
+      "password": "رمز عبور",
+      "submit": "تغییر",
+      "userNameRequire": "نام الزامی است",
+      "lastNameRequire": "نام خانوادگی الزامی است",
+      "userNameValidateLong": "نام حداقل باید 3 کاراکتر باشد",
+      "lastNameValidateLong": "نام خانوادگی حداقل باید 3 کاراکتر باشد",
+      "passwordvalidate": "رمز عبور حداقل باید 8 کاراکتر باشد",
+      "passwordRequire": "رمز عبور الزامی است",
+      "passRules": "پسوورد باید دارای حداقل 8 کاراکتر و یک حرف بزرگ و یک عدد باشد",
+      "ChenagePassword": {}
+    }
   }
 }

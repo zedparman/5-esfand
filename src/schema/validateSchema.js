@@ -53,6 +53,23 @@ const validateSchemaSignUp = (t) => {
   });
   return signUpFormSchema;
 };
+const validateSchemaChangeAccountDetails = (t) => {
+  const signUpFormSchema = yup.object().shape({
+    name: yup
+      .string()
+      .min(3, t.userNameValidateLong)
+      .required(t.userNameRequire),
+    lastName: yup
+      .string()
+      .min(3, t.lastNameValidateLong)
+      .required(t.lastNameRequire),
+    password: yup
+      .string()
+      .min(8, t.passwordvalidate)
+      .required(t.passwordRequire),
+  });
+  return signUpFormSchema;
+};
 const validateSchemaSignIn = (t) => {
   const signUpFormSchema = yup.object().shape({
     email: yup.string().email(t.emailValidate).required(t.emailRequire),
@@ -67,4 +84,4 @@ const validateSchemaSignIn = (t) => {
   return signUpFormSchema;
 };
 
-export { validateSchemaSignUp , validateSchemaSignIn };
+export { validateSchemaSignUp, validateSchemaSignIn , validateSchemaChangeAccountDetails };
