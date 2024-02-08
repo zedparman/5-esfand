@@ -84,18 +84,18 @@ const CreateQuestionForm = ({ t }) => {
 
         <Dialog>
           <DialogTrigger asChild>
-            <Button variant="outline">Edit Profile</Button>
+            <Button variant="outline">Add</Button>
           </DialogTrigger>
           <DialogContent className="sm:max-w-[425px]">
             <DialogHeader>
-              <DialogTitle>Edit profile</DialogTitle>
+              <DialogTitle>Add option</DialogTitle>
               <DialogDescription>
-                Make changes to your profile here. Click save when you re done.
+                Click save when you re done.
               </DialogDescription>
             </DialogHeader>
 
             <DialogFooter>
-              <Button type="submit">Save changes</Button>
+              <Button type="submit">Save </Button>
             </DialogFooter>
           </DialogContent>
         </Dialog>

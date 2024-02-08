@@ -10,6 +10,8 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import { revalidatePath } from "next/cache";
 import { useRouter } from "next/navigation";
+import { Link } from "@/navigations";
+import toast from "react-hot-toast";
 
 const SignUpComponent = ({ t }) => {
   const schemaValidate = validateSchemaSignUp(t);
@@ -42,10 +44,13 @@ const SignUpComponent = ({ t }) => {
       );
       console.log(res);
       if (res.status !== 200) {
-        console.log(res.error);
+        console.log(res);
+        toast.error(res.error);
+      } else {
+        toast.success(t.successMessage);
+        router.push("/accounts/dashboard");
+        router.refresh();
       }
-      router.push("/accounts/dashboard");
-      router.refresh();
     },
   });
   return (
@@ -130,6 +135,12 @@ const SignUpComponent = ({ t }) => {
               </p>
             )}
           </div>
+          <p className="flex gap-2 text-sm">
+            {t.HaveAccount}
+            <span className="text-primary">
+              <Link href="/signin">{t.SignIn}</Link>
+            </span>
+          </p>
           <Button
             type="submit"
             className="text"

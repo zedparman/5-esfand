@@ -7,7 +7,8 @@ import { useFormik } from "formik";
 import React from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
-
+import { Link } from "@/navigations";
+import toast from "react-hot-toast";
 const SignInComponent = ({ t }) => {
   const schemaValidate = validateSchemaSignIn(t);
   const router = useRouter();
@@ -24,12 +25,15 @@ const SignInComponent = ({ t }) => {
         password: password,
         redirect: false,
       });
-      console.log(res);
+      // console.log(res);
       if (res.status !== 200) {
-        console.log(res.error);
+        console.log(res);
+        toast.error(res.error);
+      } else {
+        toast.success(t.successMessage);
+        router.push("/accounts/dashboard");
+        router.refresh();
       }
-      router.push("/accounts/dashboard");
-      router.refresh();
     },
   });
   return (
@@ -70,7 +74,12 @@ const SignInComponent = ({ t }) => {
               <p className="text-xs text-red-500">{formik.errors.password}</p>
             )}
           </div>
-
+          <p className="flex gap-2 text-sm">
+            {t.DontHaveAccount}
+            <span className="text-primary">
+              <Link href="/signup">{t.SignUp}</Link>
+            </span>
+          </p>
           <Button
             type="submit"
             className="text"

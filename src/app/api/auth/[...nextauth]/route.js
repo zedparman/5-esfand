@@ -17,17 +17,20 @@ export const authOptions = {
         if (!email || !password) {
           throw new Error("invalid data!");
         }
+        // console.log(email);
 
         const user = await User.findOne({ email: email });
-        if (!user) {
+        // console.log(user);
+        if (user == null) {
           throw new Error("User does'nt exist!");
         }
-        const isValidPassword = verifyPassword(password, user.password);
+        const isValidPassword = await verifyPassword(password, user.password);
+        // console.log({ isValidPassword });
         if (!isValidPassword) {
           throw new Error("Email or password is incorrect");
         }
         const name = user?.name?.split(" ");
-
+        // console.log("resid be 2");
         // console.log(user);
         return {
           name: name[0],

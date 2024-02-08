@@ -14,10 +14,32 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { Link } from "@/navigations";
-import { useTranslations } from "next-intl";
+import { useMessages } from "next-intl";
+import { Home, Settings, SquarePen, ScrollText } from "lucide-react";
 
-const SideNav = () => {
-  const t = useTranslations("Index");
+const SideNav = ({ isAuth }) => {
+  // console.log()
+
+  const t = useMessages("Index");
+  const navItems = [
+    { name: t.Dashboard.Home, href: "/accounts/dashboard", icon: Home },
+
+    {
+      name: t.Dashboard.CreateQuestion,
+      href: "/accounts/dashboard/create-question",
+      icon: SquarePen,
+    },
+    {
+      name: t.Dashboard.QuestionsList,
+      href: "/accounts/dashboard/questions-list",
+      icon: ScrollText,
+    },
+    {
+      name: t.Dashboard.Settings,
+      href: "/accounts/dashboard/settings",
+      icon: Settings,
+    },
+  ];
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -27,12 +49,31 @@ const SideNav = () => {
       </SheetTrigger>
       <SheetContent>
         <SheetHeader>
-          <SheetTitle>Question Area</SheetTitle>
+          <SheetTitle>
+            <Link href={"/"}>Question Area</Link>
+          </SheetTitle>
         </SheetHeader>
         <div className="flex flex-col gap-4 py-4">
-          <Link href={"/signin"}>{t("signIn")}</Link>
-          <Link href={"/signup"}>{t("signUp")}</Link>
-          <Link href={"/questions"}>{t("questions")}</Link>
+          {isAuth == null ? (
+            <>
+              <Link href={"/signin"}>{t.Index.signIn}</Link>
+              <Link href={"/signup"}>{t.Index.signUp}</Link>
+              <Link href={"/questions"}>{t.Index.questions}</Link>
+            </>
+          ) : (
+            navItems.map((item) => (
+              <Link
+                key={crypto.randomUUID}
+                href={item.href}
+                className="w-full flex justify-between items-center hover:bg-card p-2"
+              >
+                {item.name}
+                <span>
+                  <item.icon />
+                </span>
+              </Link>
+            ))
+          )}
         </div>
         <SheetFooter></SheetFooter>
       </SheetContent>

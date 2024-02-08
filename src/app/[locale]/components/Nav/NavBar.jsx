@@ -18,7 +18,7 @@ const NavBar = ({ session }) => {
         {session == null ? <></> : <UserNav t={t.Dashboard} data={session} />}
         <ChangeLangDropDown />
         <ThemeToggle />
-        <SideNav />
+        <SideNav isAuth={session} />
       </div>
     </nav>
   );

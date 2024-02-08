@@ -1,8 +1,8 @@
 import mongoose from "mongoose";
 
-if (!process.env.DATABASE_URL) {
-  throw new Error("please add the database url in .env file");
-}
+// if (!process.env.DATABASE_URL) {
+//   throw new Error("please add the database url in .env file");
+// }
 
 const DATABASE_URL = process.env.DATABASE_URL;
 

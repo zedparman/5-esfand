@@ -1,9 +1,14 @@
 import { useMessages } from "next-intl";
 import SignUpComponent from "../../components/SignUp/SignUpComponent";
+import CheckAuthRedirect from "@/app/context/CheckAuthRedirect";
 
 const SignUpPage = () => {
   const t = useMessages("SignUp");
-  return <SignUpComponent t={t.SignUp} />;
+  return (
+    <CheckAuthRedirect>
+      <SignUpComponent t={t.SignUp} />
+    </CheckAuthRedirect>
+  );
 };
 
 export default SignUpPage;
