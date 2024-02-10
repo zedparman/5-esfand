@@ -5,6 +5,7 @@ import SideNav from "./SideNav";
 import { Link } from "@/navigations";
 import { useMessages } from "next-intl";
 import { UserNav } from "./UserNav";
+import NavContract from "./NavContract";
 
 const NavBar = ({ session }) => {
   const t = useMessages("Dasboard");
@@ -18,6 +19,8 @@ const NavBar = ({ session }) => {
         {session == null ? <></> : <UserNav t={t.Dashboard} data={session} />}
         <ChangeLangDropDown />
         <ThemeToggle />
+        <NavContract />
+
         <SideNav isAuth={session} />
       </div>
     </nav>
