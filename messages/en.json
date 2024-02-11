@@ -64,6 +64,7 @@
     "Settings": "Settings",
     "QuestionsList": "Question List",
     "LogOut": "Log Out",
+    "ConnectWallet" : "Connect Wallet",
     "SettingsPage": {
       "title": "Change account Information",
       "name": "Name",

@@ -13,6 +13,7 @@ import {
 import { Home, Settings, SquarePen, ScrollText } from "lucide-react";
 import { Link } from "@/navigations";
 import { signOut } from "next-auth/react";
+import NavContract from "./NavContract";
 
 export function UserNav({ data, t }) {
   // console.log({ data });
@@ -56,6 +57,9 @@ export function UserNav({ data, t }) {
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
+          <DropdownMenuItem asChild>
+            <NavContract text={t.ConnectWallet} />
+          </DropdownMenuItem>
           {navItems.map((item, index) => (
             <DropdownMenuItem key={index} asChild>
               <Link

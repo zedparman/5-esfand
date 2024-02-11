@@ -19,7 +19,6 @@ const NavBar = ({ session }) => {
         {session == null ? <></> : <UserNav t={t.Dashboard} data={session} />}
         <ChangeLangDropDown />
         <ThemeToggle />
-        <NavContract />
 
         <SideNav isAuth={session} />
       </div>
