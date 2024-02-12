@@ -16,10 +16,22 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-
+import {
+  createPoll,
+  formatTimestamp,
+} from "../../../../../services/blockchain";
+import { globalActions } from "../../../../../store/globalSlices";
+import { useDispatch, useSelector } from "react-redux";
+import toast from "react-hot-toast";
 const CreateQuestionForm = ({ t }) => {
+  const dispatch = useDispatch();
+  const { setCreateModal } = globalActions;
+  const { wallet, createModal } = useSelector((states) => states.globalStates);
   const schemaValidate = validateSchemaCreateQuestion(t);
   const router = useRouter();
+
+  const [timeS, setTimeS] = useState("");
+  const [timeX, setTimeX] = useState("");
 
   const formik = useFormik({
     initialValues: {
@@ -28,23 +40,21 @@ const CreateQuestionForm = ({ t }) => {
     },
     validationSchema: schemaValidate,
     onSubmit: async (data) => {
-      const { title, subTitle } = data;
-      const res = await axios.post(
-        "/api/auth/update-info",
-        {
-          title,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      console.log(res);
-      if (res.status !== 200) {
-        console.log(res.error);
+      const { inpTitle, inpSubTitle } = data;
+      if (wallet === "") {
+        toast.error("Connect wallet first!");
       }
-      router.refresh();
+      console.log(inpTitle, inpSubTitle);
+      const res = await createPoll({
+        title: inpTitle,
+        description: inpSubTitle,
+        startsAt: timeS,
+        endsAt: timeX,
+        image: "yourImageValue",
+      });
+      console.log(res);
+
+      // router.refresh();
     },
   });
   return (
@@ -81,7 +91,16 @@ const CreateQuestionForm = ({ t }) => {
             <p className="text-xs text-red-500">{formik.errors.inpSubTitle}</p>
           )}
         </div>
-
+        <div>
+          <input
+            type="date"
+            onChange={(e) => setTimeS(new Date(e.target.value).getTime())}
+          />
+          <input
+            type="date"
+            onChange={(e) => setTimeX(new Date(e.target.value).getTime())}
+          />
+        </div>
         <Dialog>
           <DialogTrigger asChild>
             <Button variant="outline">Add</Button>

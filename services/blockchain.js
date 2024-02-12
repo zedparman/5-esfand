@@ -3,6 +3,7 @@ import { ethers } from "ethers";
 import { globalActions } from "../store/globalSlices";
 import address from "../artifacts/contractAddress.json";
 import abi from "../artifacts/contracts/Lock.sol/DappVotes.json";
+import { Web3Provider, JsonRpcProvider } from "@ethersproject/providers";
 // import abi from "@/artifacts/contracts/DappVotes.sol/DappVotes.json";
 // import { logOutWithCometChat } from "./chat";
 
@@ -20,8 +21,8 @@ if (typeof window !== "undefined") {
 const getEthereumContract = async () => {
   const accounts = await ethereum?.request?.({ method: "eth_accounts" });
   const provider = accounts?.[0]
-    ? new ethers.BrowserProvider.Web3Provider(ethereum)
-    : new ethers.BrowserProvider.JsonRpcProvider("http://localhost:8545");
+    ? new Web3Provider(ethereum)
+    : new JsonRpcProvider("http://localhost:8545");
   const wallet = accounts?.[0] ? null : ethers.Wallet.createRandom();
   const signer = provider.getSigner(
     accounts?.[0] ? undefined : wallet?.address

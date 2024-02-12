@@ -64,7 +64,7 @@
     "Settings": "تنظیمات",
     "QuestionsList": "لیست سوالات",
     "LogOut": "خروج",
-    "ConnectWallet" : "Connect Wallet",
+    "ConnectWallet": "Connect Wallet",
     "SettingsPage": {
       "title": "تغییر اطلاعات اکانت",
       "name": "نام",
@@ -103,5 +103,9 @@
       "inpSubValidateLong": "توضیحات حداقل باید 3 کاراکتر باشد",
       "submit": "ساختن"
     }
+  },
+  "QuestionsPageCom": {
+    "title": "سوالات",
+    "Details": "جزئیات"
   }
 }

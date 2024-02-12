@@ -64,7 +64,7 @@
     "Settings": "Settings",
     "QuestionsList": "Question List",
     "LogOut": "Log Out",
-    "ConnectWallet" : "Connect Wallet",
+    "ConnectWallet": "Connect Wallet",
     "SettingsPage": {
       "title": "Change account Information",
       "name": "Name",
@@ -103,5 +103,9 @@
       "inpSubValidateLong": "Description must be 3 or more characters long",
       "submit": "Create"
     }
+  },
+  "QuestionsPageCom": {
+    "title": "Questions",
+    "Details" : "Details"
   }
 }
