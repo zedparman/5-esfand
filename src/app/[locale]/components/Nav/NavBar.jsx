@@ -20,7 +20,7 @@ const NavBar = ({ session }) => {
         <ChangeLangDropDown />
         <ThemeToggle />
 
-        <SideNav isAuth={session} />
+        <SideNav t={t} isAuth={session} />
       </div>
     </nav>
   );

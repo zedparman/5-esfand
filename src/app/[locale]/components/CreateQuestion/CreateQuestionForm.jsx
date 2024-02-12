@@ -23,15 +23,47 @@ import {
 import { globalActions } from "../../../../../store/globalSlices";
 import { useDispatch, useSelector } from "react-redux";
 import toast from "react-hot-toast";
+import QuestionCard from "./QuestionCard";
+import { format } from "date-fns";
+
+
+
 const CreateQuestionForm = ({ t }) => {
   const dispatch = useDispatch();
-  const { setCreateModal } = globalActions;
   const { wallet, createModal } = useSelector((states) => states.globalStates);
   const schemaValidate = validateSchemaCreateQuestion(t);
   const router = useRouter();
 
+  const [isOpenDialog, setIsOpenDialog] = useState(false);
+
+  const [optionData, setOptionData] = useState({
+    title: "",
+    desc: "",
+  });
+  const [finalOptions, setFinalOptions] = useState([]);
+
   const [timeS, setTimeS] = useState("");
   const [timeX, setTimeX] = useState("");
+
+  const clickHander = () => {
+    console.log(v4());
+    const updatedOptions = [
+      ...finalOptions,
+      {
+        id: `${v4()}`,
+        title: optionData.title,
+        desc: optionData.desc,
+        count: 0,
+      },
+    ];
+    setFinalOptions(updatedOptions);
+    setIsOpenDialog(false);
+    setOptionData({
+      title: "",
+      desc: "",
+    });
+    console.log(updatedOptions);
+  };
 
   const formik = useFormik({
     initialValues: {
@@ -41,20 +73,35 @@ const CreateQuestionForm = ({ t }) => {
     validationSchema: schemaValidate,
     onSubmit: async (data) => {
       const { inpTitle, inpSubTitle } = data;
-      if (wallet === "") {
-        toast.error("Connect wallet first!");
-      }
-      console.log(inpTitle, inpSubTitle);
-      const res = await createPoll({
-        title: inpTitle,
-        description: inpSubTitle,
-        startsAt: timeS,
-        endsAt: timeX,
-        image: "yourImageValue",
-      });
-      console.log(res);
 
-      // router.refresh();
+      // console.log(inpTitle, inpSubTitle, finalOptions, timeS);
+      const res = await axios.post(
+        "/api/sssp",
+        {
+          title: inpTitle,
+          description: inpSubTitle,
+          options: finalOptions,
+          startDate: timeS,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      console.log(res);
+      // if (res.status !== 200) {
+      //   console.log(res);
+      //   toast.error(res.error);
+      // } else {
+      //   toast.success(res.message);
+      // }
+      // console.log({
+      //   title: inpTitle,
+      //   description: inpSubTitle,
+      //   options: finalOptions,
+      //   startDate: timeS,
+      // });
     },
   });
   return (
@@ -94,16 +141,50 @@ const CreateQuestionForm = ({ t }) => {
         <div>
           <input
             type="date"
-            onChange={(e) => setTimeS(new Date(e.target.value).getTime())}
+            onChange={(e) =>
+              setTimeS(format(new Date(e.target.value), "yyyy-MM-dd"))
+            }
           />
           <input
             type="date"
-            onChange={(e) => setTimeX(new Date(e.target.value).getTime())}
+            onChange={(e) =>
+              setTimeX(format(new Date(e.target.value), "yyyy-MM-dd"))
+            }
           />
         </div>
-        <Dialog>
+        <div className="flex flex-col gap-6 my-5">
+          {finalOptions?.map((item) => (
+            <div
+              key={crypto.randomUUID}
+              className="flex w-[80%] border-2 border-primary p-3 rounded-md"
+            >
+              <div>
+                <h1 className="text-2xl border-b-2 border-primary w-auto">
+                  {item.title}
+                </h1>
+                <p className="text-primary-foreground text-base my-5">
+                  {item.desc}
+                </p>
+                <button
+                  className="bg-primary p-2 rounded-md"
+                  onClick={() => {
+                    const update = finalOptions.filter(
+                      (oldItem) => oldItem.id !== item.id
+                    );
+                    setFinalOptions(update);
+                  }}
+                >
+                  Delete
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+        <Dialog open={isOpenDialog}>
           <DialogTrigger asChild>
-            <Button variant="outline">Add</Button>
+            <Button onClick={() => setIsOpenDialog(true)} variant="outline">
+              Add
+            </Button>
           </DialogTrigger>
           <DialogContent className="sm:max-w-[425px]">
             <DialogHeader>
@@ -112,9 +193,32 @@ const CreateQuestionForm = ({ t }) => {
                 Click save when you re done.
               </DialogDescription>
             </DialogHeader>
-
+            <div>
+              <div>
+                <Label>Title</Label>
+                <Input
+                  type="text"
+                  value={optionData.title}
+                  onChange={(e) =>
+                    setOptionData({ ...optionData, title: e.target.value })
+                  }
+                />
+              </div>
+              <div>
+                <Label>Caption</Label>
+                <Input
+                  type="text"
+                  value={optionData.desc}
+                  onChange={(e) =>
+                    setOptionData({ ...optionData, desc: e.target.value })
+                  }
+                />
+              </div>
+            </div>
             <DialogFooter>
-              <Button type="submit">Save </Button>
+              <Button type="submit" onClick={clickHander}>
+                Save
+              </Button>
             </DialogFooter>
           </DialogContent>
         </Dialog>
