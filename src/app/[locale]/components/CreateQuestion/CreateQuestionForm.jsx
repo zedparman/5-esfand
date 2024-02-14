@@ -25,9 +25,7 @@ import { useDispatch, useSelector } from "react-redux";
 import toast from "react-hot-toast";
 import QuestionCard from "./QuestionCard";
 import { format } from "date-fns";
-
-
-
+import uniqid from "uniqid";
 const CreateQuestionForm = ({ t }) => {
   const dispatch = useDispatch();
   const { wallet, createModal } = useSelector((states) => states.globalStates);
@@ -46,11 +44,10 @@ const CreateQuestionForm = ({ t }) => {
   const [timeX, setTimeX] = useState("");
 
   const clickHander = () => {
-    console.log(v4());
     const updatedOptions = [
       ...finalOptions,
       {
-        id: `${v4()}`,
+        id: `${uniqid()}`,
         title: optionData.title,
         desc: optionData.desc,
         count: 0,

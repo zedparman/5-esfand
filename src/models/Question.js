@@ -7,9 +7,14 @@ const questionSchema = new mongoose.Schema({
   startDate: { type: Date, required: true },
   endDate: { type: Date, required: true },
   options: [{ type: Object }], // از نوع Object و ارایه ای از آن
-  comments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment"  }], // یک آرایه از رشته‌ها برای کامنت‌ها
+  comments: {
+    type: [mongoose.Schema.Types.ObjectId],
+    default: [],
+    ref: "Comment",
+  },
 });
 
-const Question = mongoose.models.Question || mongoose.model("Question", questionSchema);
+const Question =
+  mongoose.models.Question || mongoose.model("Question", questionSchema);
 
 module.exports = Question;

@@ -57,30 +57,14 @@ export async function POST(req, res) {
     options: options,
     startDate: startDate,
     endDate: newEndDate,
-    comments: "",
   });
   console.log(newQuestion);
 
-  // await user?.posts?.push(newQuestion); // اضافه کردن سؤال جدید به لیست سؤال‌های کاربر
+  await newQuestion.save();
 
-  // await newQuestion.save();
-  // await user.save();
+  await user?.questions?.push(newQuestion);
 
-  // const newQuestion = new Question({
-  //   author: "siavash",
-  //   title: "title",
-  //   description: "description",
-  //   options: [{ name: "siavash", family: "kaseb" }],
-  //   startDate: "startDate",
-  //   endDate: "newEndDate",
-  //   comments: "",
-  // });
-
-  // await newQuestion.save();
-
-  // // await user?.questions?.push(newQuestion);
-
-  // await user.save();
+  await user.save();
 
   return NextResponse.json({
     status: "success",
