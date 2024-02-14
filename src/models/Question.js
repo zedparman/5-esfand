@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 
 const questionSchema = new mongoose.Schema({
+  questionId: { type: String, required: true },
   author: { type: String, required: true },
   title: { type: String, required: true },
   caption: { type: String, required: true },

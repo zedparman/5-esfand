@@ -1,16 +1,18 @@
 import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
-import connectDb from "../../../../../utils/connectDB";
+import connectDb from "../../../../utils/connectDB";
 
 import User from "@/models/User";
 import Question from "@/models/Question";
+import uniqid from "uniqid";
+import slugify from "slugify";
 
 export async function POST(req, res) {
   await connectDb();
 
   const data = await req.json();
   const { title, description, startDate, options, endDate } = data;
-  // console.log(title, description, startDate, options, endDate);
+
   if (!title || !description || !startDate || !options) {
     return NextResponse.json(
       {
@@ -34,64 +36,44 @@ export async function POST(req, res) {
     );
   }
 
-  const newEndDate = endDate == undefined ? "" : endDate;
+  const newEndDate = endDate == undefined ? "01" : endDate;
+  console.log(newEndDate);
 
-  try {
-    const user = await User.findOne({ email: session.user.email }); // یافتن کاربر بر اساس ایمیل جلسه فعلی
-    if (!user) {
-      return NextResponse.json(
-        {
-          status: "failed",
-          message: "User not found.",
-        },
-        { status: 404 }
-      );
-    }
-    const authorName = user?.name;
-
-    // const newQuestion = new Question({
-    //   author: authorName,
-    //   title: title,
-    //   description: description,
-    //   options: options,
-    //   startDate: startDate,
-    //   endDate: newEndDate,
-    //   comments: "",
-    // });
-    // console.log(user);
-
-    // await user?.posts?.push(newQuestion); // اضافه کردن سؤال جدید به لیست سؤال‌های کاربر
-
-    // await newQuestion.save();
-    // await user.save();
-
-    const newQuestion = new Question({
-      author: "siavash",
-      title: "title",
-      description: "description",
-      options: "options",
-      startDate: "startDate",
-      endDate: "newEndDate",
-      comments: "",
-    });
-
-    await newQuestion.save();
-
-    // await user?.questions?.push(newQuestion);
-
-    await user.save();
-
-    return NextResponse.json({
-      status: "success",
-      message: "Question successfully created!",
-    });
-  } catch (err) {
+  const user = await User.findOne({ email: session.user.email });
+  if (!user) {
     return NextResponse.json(
       {
         status: "failed",
-        message: `Error: ${err}`,
+        message: "User not found.",
       },
-      { status: 500 }
+      { status: 404 }
     );
   }
+  const authorName = user?.name;
+  console.log(authorName);
+
+  const oldTitle = `${title + " " + uniqid()}`;
+  const convertTitle = slugify(oldTitle);
+
+  const newQuestion = new Question({
+    questionId: convertTitle,
+    author: authorName,
+    title: title,
+    caption: description,
+    options: options,
+    startDate: startDate,
+    endDate: newEndDate,
+  });
+  console.log(newQuestion);
+
+  await newQuestion.save();
+
+  await user?.questions?.push(newQuestion);
+
+  await user.save();
+
+  return NextResponse.json({
+    status: "success",
+    message: "Question successfully created!",
+  });
 }

@@ -24,8 +24,19 @@ import { globalActions } from "../../../../../store/globalSlices";
 import { useDispatch, useSelector } from "react-redux";
 import toast from "react-hot-toast";
 import QuestionCard from "./QuestionCard";
-import { format } from "date-fns";
 import uniqid from "uniqid";
+
+import { CalendarIcon } from "@radix-ui/react-icons";
+import { format } from "date-fns";
+
+import { cn } from "@/lib/utils";
+import { Calendar } from "@/components/ui/calendar";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+
 const CreateQuestionForm = ({ t }) => {
   const dispatch = useDispatch();
   const { wallet, createModal } = useSelector((states) => states.globalStates);
@@ -42,6 +53,8 @@ const CreateQuestionForm = ({ t }) => {
 
   const [timeS, setTimeS] = useState("");
   const [timeX, setTimeX] = useState("");
+  const [date, setDate] = React.useState();
+  console.log();
 
   const clickHander = () => {
     const updatedOptions = [
@@ -51,6 +64,7 @@ const CreateQuestionForm = ({ t }) => {
         title: optionData.title,
         desc: optionData.desc,
         count: 0,
+        voters: [],
       },
     ];
     setFinalOptions(updatedOptions);
@@ -73,12 +87,12 @@ const CreateQuestionForm = ({ t }) => {
 
       // console.log(inpTitle, inpSubTitle, finalOptions, timeS);
       const res = await axios.post(
-        "/api/sssp",
+        "/api/auth/create-question",
         {
           title: inpTitle,
           description: inpSubTitle,
           options: finalOptions,
-          startDate: timeS,
+          startDate: date,
         },
         {
           headers: {
@@ -87,12 +101,12 @@ const CreateQuestionForm = ({ t }) => {
         }
       );
       console.log(res);
-      // if (res.status !== 200) {
-      //   console.log(res);
-      //   toast.error(res.error);
-      // } else {
-      //   toast.success(res.message);
-      // }
+      if (res.status !== 200) {
+        console.log(res);
+        toast.error(res.error);
+      } else {
+        toast.success(res.message);
+      }
       // console.log({
       //   title: inpTitle,
       //   description: inpSubTitle,
@@ -148,6 +162,28 @@ const CreateQuestionForm = ({ t }) => {
               setTimeX(format(new Date(e.target.value), "yyyy-MM-dd"))
             }
           />
+          <Popover>
+            <PopoverTrigger asChild>
+              <Button
+                variant={"outline"}
+                className={cn(
+                  "w-[240px] justify-start text-left font-normal",
+                  !date && "text-muted-foreground"
+                )}
+              >
+                <CalendarIcon className="mr-2 h-4 w-4" />
+                {date ? format(date, "PPP") : <span>Pick a date</span>}
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent className="w-auto p-0" align="start">
+              <Calendar
+                mode="single"
+                selected={date}
+                onSelect={setDate}
+                initialFocus
+              />
+            </PopoverContent>
+          </Popover>
         </div>
         <div className="flex flex-col gap-6 my-5">
           {finalOptions?.map((item) => (

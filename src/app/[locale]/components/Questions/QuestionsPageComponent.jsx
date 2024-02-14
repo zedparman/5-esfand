@@ -1,7 +1,9 @@
 import React from "react";
 import QuestionCard from "./QuestionCard";
-
-const QuestionsPageComponent = ({ t }) => {
+import axios from "axios";
+const QuestionsPageComponent = async ({ t }) => {
+  const res = await axios.post("/api/auth/tsgh")
+  console.log({res})
   return (
     <section className="flex flex-col items-center justify-center p-2">
       <h1 className="text-2xl font-bold text-primary">{t.title}</h1>
