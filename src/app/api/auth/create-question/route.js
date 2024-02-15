@@ -1,6 +1,6 @@
 import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
-import connectDb from "../../../../utils/connectDB";
+import connectDb from "../../../../../utils/connectDB";
 
 import User from "@/models/User";
 import Question from "@/models/Question";

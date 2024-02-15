@@ -15,6 +15,11 @@ const DashboardNav = ({ t }) => {
     },
     {
       name: t.QuestionsList,
+      href: "/questions",
+      icon: ScrollText,
+    },
+    {
+      name: t.MyQuestions,
       href: "/accounts/dashboard/questions-list",
       icon: ScrollText,
     },

@@ -150,7 +150,7 @@ const CreateQuestionForm = ({ t }) => {
           )}
         </div>
         <div>
-          <input
+          {/* <input
             type="date"
             onChange={(e) =>
               setTimeS(format(new Date(e.target.value), "yyyy-MM-dd"))
@@ -161,7 +161,7 @@ const CreateQuestionForm = ({ t }) => {
             onChange={(e) =>
               setTimeX(format(new Date(e.target.value), "yyyy-MM-dd"))
             }
-          />
+          /> */}
           <Popover>
             <PopoverTrigger asChild>
               <Button

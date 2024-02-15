@@ -63,6 +63,7 @@
     "CreateQuestion": "Create Question",
     "Settings": "Settings",
     "QuestionsList": "Question List",
+    "MyQuestions": "My Question",
     "LogOut": "Log Out",
     "ConnectWallet": "Connect Wallet",
     "SettingsPage": {
@@ -106,6 +107,6 @@
   },
   "QuestionsPageCom": {
     "title": "Questions",
-    "Details" : "Details"
+    "Details": "Details"
   }
 }
