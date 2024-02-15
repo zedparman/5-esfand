@@ -4,7 +4,7 @@ import QuestionCard from "@/app/[locale]/components/Questions/QuestionCard";
 import { getSession } from "next-auth/react";
 
 const getAllQuestions = async () => {
-  const response = await axios.post("http://192.168.1.104:8085/api/auth/get-user-questions");
+  const response = await axios.post("/api/auth/get-user-questions");
   return response.data;
 };
 const QuestionsPageComponent = async (props) => {
