@@ -68,9 +68,6 @@ dependencies:
   date-fns:
     specifier: ^3.3.1
     version: 3.3.1
-  dotenv:
-    specifier: ^16.4.1
-    version: 16.4.1
   formik:
     specifier: ^2.4.5
     version: 2.4.5(react@18.2.0)
@@ -4462,11 +4459,6 @@ packages:
     resolution: {integrity: sha512-HnM6ZlFqcajLsyudHq7LeeLDr2rFAVYtDv/hV5qchQEidSck8j9OPUsXY9KwJv/lHMtYlX4DjRQqwFYa+0r8Ug==}
     dependencies:
       no-case: 2.3.2
-    dev: false
-
-  /dotenv@16.4.1:
-    resolution: {integrity: sha512-CjA3y+Dr3FyFDOAMnxZEGtnW9KBR2M0JvvUtXNW+dYJL5ROWxP9DUHCwgFqpMk0OXCc0ljhaNTr2w/kutYIcHQ==}
-    engines: {node: '>=12'}
     dev: false
 
   /eastasianwidth@0.2.0:
