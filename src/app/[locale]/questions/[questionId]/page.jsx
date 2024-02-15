@@ -5,7 +5,7 @@ import QuestionDetailOptionCard from "../../components/QuestionDetail/QuestionDe
 
 const getQuestion = async (id) => {
   const response = await axios.post(
-    "/api/get-question/",
+    `${process.env.BASE_API + `/api/get-question/`}`,
     { id },
     {
       headers: {
