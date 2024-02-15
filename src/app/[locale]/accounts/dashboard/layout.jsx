@@ -2,7 +2,7 @@ import { useMessages } from "next-intl";
 import DashboardNav from "../../components/Nav/DashboardNav";
 import GetAccess from "@/app/context/GetAccess";
 
-export default function DashboardLayout({ children }) {
+export default function DashboardLayout({ children , session }) {
   const t = useMessages();
 
   return (

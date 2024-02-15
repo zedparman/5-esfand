@@ -31,6 +31,7 @@ const SignInComponent = ({ t }) => {
         toast.error(res.error);
       } else {
         toast.success(t.successMessage);
+        window.localStorage.setItem("em", email);
         router.push("/accounts/dashboard");
         router.refresh();
       }

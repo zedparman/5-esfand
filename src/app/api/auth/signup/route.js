@@ -61,10 +61,15 @@ export async function POST(req, res) {
     });
 
     await newUser.save();
-    return NextResponse.json({
-      status: "success",
-      message: "Register success!",
-    });
+    return NextResponse.json(
+      {
+        status: "success",
+        message: "Register success!",
+      },
+      {
+        headers: { "Set-Cookie": `em=${email};` },
+      }
+    );
   } catch (err) {
     return NextResponse.json(
       {

@@ -32,4 +32,7 @@ export const globalActions = {
   setCurrentUser: (state, action) => {
     state.currentUser = action.payload;
   },
+  setSesseionUser: (state, action) => {
+    state.currentUser = action.payload;
+  },
 };

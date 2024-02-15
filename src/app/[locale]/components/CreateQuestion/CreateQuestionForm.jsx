@@ -87,7 +87,7 @@ const CreateQuestionForm = ({ t }) => {
 
       // console.log(inpTitle, inpSubTitle, finalOptions, timeS);
       const res = await axios.post(
-        "/api/auth/create-question",
+        "/api/auth/god",
         {
           title: inpTitle,
           description: inpSubTitle,

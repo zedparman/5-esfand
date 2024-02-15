@@ -1,6 +1,7 @@
 import React from "react";
 import QuestionCard from "./QuestionCard";
 import axios from "axios";
+import Questionjkl from "./Questionjkl";
 
 const getAllQuestions = async () => {
   const response = await axios.get(
@@ -11,16 +12,7 @@ const getAllQuestions = async () => {
 const QuestionsPageComponent = async ({ t }) => {
   const res = await getAllQuestions();
   console.log({ res });
-  return (
-    <section className="flex flex-col w-full items-center justify-center p-2">
-      <h1 className="text-2xl font-bold text-primary">{t.title}</h1>
-      <div className="my-5 w-full flex flex-col items-center gap-7">
-        {res?.data?.map((item) => (
-          <QuestionCard key={item._id} t={t} path={"60"} {...item} />
-        ))}
-      </div>
-    </section>
-  );
+  return <Questionjkl res={res} t={t} />;
 };
 
 export default QuestionsPageComponent;
