@@ -65,11 +65,7 @@ const CreateQuestionForm = ({ t }) => {
         title: optionData.title,
         desc: optionData.desc,
         count: 0,
-        voters: [
-          {
-            wallet: "1",
-          },
-        ],
+        voters: [],
       },
     ];
     setFinalOptions(updatedOptions);

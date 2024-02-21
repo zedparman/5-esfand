@@ -27,7 +27,7 @@ const QuestionDetailCl = ({ res }) => {
               <QuestionDetailOptionCard
                 // session={session}
                 wallet={wallet}
-                questionsId={res.data.questionId}
+                questionId={res.data.questionId}
                 key={uniqid()}
                 {...item}
               />
