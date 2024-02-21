@@ -16,6 +16,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+
 import {
   createPoll,
   formatTimestamp,
@@ -64,7 +65,11 @@ const CreateQuestionForm = ({ t }) => {
         title: optionData.title,
         desc: optionData.desc,
         count: 0,
-        voters: [],
+        voters: [
+          {
+            wallet: "1",
+          },
+        ],
       },
     ];
     setFinalOptions(updatedOptions);
@@ -87,7 +92,7 @@ const CreateQuestionForm = ({ t }) => {
 
       // console.log(inpTitle, inpSubTitle, finalOptions, timeS);
       const res = await axios.post(
-        "/api/auth/god",
+        "/api/auth/create-question",
         {
           title: inpTitle,
           description: inpSubTitle,
@@ -106,6 +111,9 @@ const CreateQuestionForm = ({ t }) => {
         toast.error(res.error);
       } else {
         toast.success(res.message);
+      }
+      if (res.data.status == "success") {
+        toast.success("Success!");
       }
       // console.log({
       //   title: inpTitle,
@@ -188,7 +196,7 @@ const CreateQuestionForm = ({ t }) => {
         <div className="flex flex-col gap-6 my-5">
           {finalOptions?.map((item) => (
             <div
-              key={crypto.randomUUID}
+              key={uniqid()}
               className="flex w-[80%] border-2 border-primary p-3 rounded-md"
             >
               <div>

@@ -2,6 +2,8 @@ import React from "react";
 import axios from "axios";
 import { getServerSession } from "next-auth";
 import QuestionCardUser from "@/app/[locale]/components/QuestionsUserList/QuestionCardUser";
+import uniqid from "uniqid";
+
 const getQuestion = async (email) => {
   const res = await axios.post(`${process.env.BASE_API}/api/auth/getqu`, {
     userEmail: email,
@@ -19,7 +21,7 @@ const QuestionListPage = async () => {
       <div className="my-5 w-full flex flex-col items-center gap-7">
         {res?.data.length > 0 ? (
           res?.data?.map((item) => (
-            <QuestionCardUser key={crypto.randomUUID} {...item} />
+            <QuestionCardUser key={uniqid()} {...item} />
           ))
         ) : (
           <h1>

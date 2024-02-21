@@ -16,6 +16,7 @@ import {
 import { Link } from "@/navigations";
 import { useMessages } from "next-intl";
 import { Home, Settings, SquarePen, ScrollText } from "lucide-react";
+import uniqid from "uniqid";
 
 const SideNav = ({ isAuth }) => {
   // console.log()
@@ -31,6 +32,11 @@ const SideNav = ({ isAuth }) => {
     },
     {
       name: t.Dashboard.QuestionsList,
+      href: "/questions",
+      icon: ScrollText,
+    },
+    {
+      name: t.Dashboard.MyQuestions,
       href: "/accounts/dashboard/questions-list",
       icon: ScrollText,
     },
@@ -63,7 +69,7 @@ const SideNav = ({ isAuth }) => {
           ) : (
             navItems.map((item) => (
               <Link
-                key={crypto.randomUUID}
+                key={uniqid()}
                 href={item.href}
                 className="w-full flex justify-between items-center hover:bg-card p-2"
               >

@@ -2,6 +2,7 @@
 import React from "react";
 import QuestionDetailOptionCard from "./QuestionDetailOptionCard";
 import { useSelector } from "react-redux";
+import uniqid from "uniqid";
 
 const QuestionDetailCl = ({ res }) => {
   const { wallet } = useSelector((states) => states.globalStates);
@@ -21,14 +22,16 @@ const QuestionDetailCl = ({ res }) => {
       <div className="flex flex-col p-3 my-5">
         <h1 className="text-2xl font-bold">Options</h1>
         <div className="my-5 w-full flex flex-col items-center gap-7">
-          {res?.data?.options?.map((item) =>
-            <QuestionDetailOptionCard
-              // session={session}
-              wallet={wallet}
-              questionsId={res.data.questionId}
-              key={crypto.randomUUID}
-              {...item}
-            />
+          {res?.data?.options?.map(
+            (item) => (
+              <QuestionDetailOptionCard
+                // session={session}
+                wallet={wallet}
+                questionsId={res.data.questionId}
+                key={uniqid()}
+                {...item}
+              />
+            )
             // console.log(item)
           )}
         </div>
