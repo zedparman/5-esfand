@@ -1,47 +1,34 @@
 import React from "react";
 import axios from "axios";
-import QuestionCard from "@/app/[locale]/components/Questions/QuestionCard";
-import { getSession } from "next-auth/react";
+import { getServerSession } from "next-auth";
+import QuestionCardUser from "@/app/[locale]/components/QuestionsUserList/QuestionCardUser";
+const getQuestion = async (email) => {
+  const res = await axios.post(`${process.env.BASE_API}/api/auth/getqu`, {
+    userEmail: email,
+  });
+  return res.data;
+};
 
-// const getAllQuestions = async () => {
-//   // console.log(window.localStorage.getItem(""));
-//   const response = await axios.post(
-//     `${process.env.BASE_API + "/api/auth/get-user-questions"}`,
-//     {
-//       name: "",
-//     }
-//   );
-
-//   return response.data;
-// };
-
-// const tesgS =  () => {
-//   const res =  axios.post(
-//     "http://localhost:8085/api/auth/change-password",
-//     {
-//       currentPassword: "asal",
-//       newPassword: "password",
-//     },
-//     {
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//     }
-//   );
-//   console.log(res);
-// };
-const QuestionsPageComponent =  (props) => {
-  // const res = await getAllQuestions();
-  const res =  tesgS();
+const QuestionListPage = async () => {
+  const session = await getServerSession();
+  const res = await getQuestion(session.user.email);
+  console.log({ res });
 
   return (
-    <div className="my-5 w-full flex flex-col items-center gap-7">
-      {/* {res?.data?.map((item) => (
-        <QuestionCard key={item._id} t={props.t} path={"60"} {...item} />
-      ))} */}
-      <button>Bezan</button>
-    </div>
+    <section className="flex flex-col w-full items-center justify-center p-2">
+      <div className="my-5 w-full flex flex-col items-center gap-7">
+        {res?.data.length > 0 ? (
+          res?.data?.map((item) => (
+            <QuestionCardUser key={crypto.randomUUID} {...item} />
+          ))
+        ) : (
+          <h1>
+            Not found any <span className="text-primary">Question</span>
+          </h1>
+        )}
+      </div>
+    </section>
   );
 };
 
-export default QuestionsPageComponent;
+export default QuestionListPage;

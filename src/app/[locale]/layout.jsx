@@ -32,7 +32,7 @@ export default async function RootLayout({ children, params: { locale } }) {
       >
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
+          defaultTheme="dark"
           enableSystem
           disableTransitionOnChange
         >
