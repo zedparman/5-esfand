@@ -5,12 +5,13 @@ import { Link } from "@/navigations";
 import { Button } from "@/components/ui/button";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 const sendVote = async (id, wallet, questionId) => {
-  const res = await axios.post(`http://localhost:8085/api/auth/sevo`, {
-    id,
-    wallet,
-    questionId,
+  const res = await axios.post(`http://localhost:8085/api/auth/ssop`, {
+    questionId: questionId,
+    optionId: id,
+    walletStr: wallet,
   });
   console.log(res.data);
 
@@ -25,14 +26,22 @@ const QuestionDetailOptionCard = ({
   questionId,
   count,
 }) => {
-  console.log(id, wallet, questionId);
   const router = useRouter();
 
   const send = async () => {
-    await sendVote(id, wallet, questionId).then((res) => {
-      console.log(res, "then");
-      router.refresh();
-    });
+    if (wallet.length <= 0) {
+      toast.error("Please connect your wallet");
+    } else {
+      await sendVote(id, wallet, questionId)
+        .then((res) => {
+          console.log("success", res);
+          toast.success("success");
+          router.refresh();
+        })
+        .catch((err) => {
+          toast.error(err.response.data.message);
+        });
+    }
   };
   return (
     <div className="flex w-[80%] border-2 border-primary p-3 rounded-md">

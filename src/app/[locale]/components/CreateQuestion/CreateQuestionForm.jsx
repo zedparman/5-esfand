@@ -17,11 +17,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 
-import {
-  createPoll,
-  formatTimestamp,
-} from "../../../../../services/blockchain";
-import { globalActions } from "../../../../../store/globalSlices";
+
 import { useDispatch, useSelector } from "react-redux";
 import toast from "react-hot-toast";
 import QuestionCard from "./QuestionCard";
@@ -106,17 +102,11 @@ const CreateQuestionForm = ({ t }) => {
         console.log(res);
         toast.error(res.error);
       } else {
-        toast.success(res.message);
+        // toast.success(res.message);
       }
       if (res.data.status == "success") {
         toast.success("Success!");
       }
-      // console.log({
-      //   title: inpTitle,
-      //   description: inpSubTitle,
-      //   options: finalOptions,
-      //   startDate: timeS,
-      // });
     },
   });
   return (
