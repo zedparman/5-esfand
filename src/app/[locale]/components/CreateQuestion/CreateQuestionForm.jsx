@@ -17,7 +17,6 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 
-
 import { useDispatch, useSelector } from "react-redux";
 import toast from "react-hot-toast";
 import QuestionCard from "./QuestionCard";
@@ -81,31 +80,66 @@ const CreateQuestionForm = ({ t }) => {
     validationSchema: schemaValidate,
     onSubmit: async (data) => {
       const { inpTitle, inpSubTitle } = data;
-
-      // console.log(inpTitle, inpSubTitle, finalOptions, timeS);
-      const res = await axios.post(
-        "/api/auth/create-question",
-        {
-          title: inpTitle,
-          description: inpSubTitle,
-          options: finalOptions,
-          startDate: date,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
+      const isSave = confirm(t.saveQuestion);
+      console.log(isSave);
+      if (isSave == false) {
+        const res = await axios.post(
+          "/api/auth/create-question",
+          {
+            title: inpTitle,
+            description: inpSubTitle,
+            options: finalOptions,
+            endDate: date,
           },
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        if (res.status !== 200) {
+          console.log(res);
+          toast.error(res.error);
         }
-      );
-      console.log(res);
-      if (res.status !== 200) {
-        console.log(res);
-        toast.error(res.error);
+        if (res.data.status == "success") {
+          toast.success("Success!");
+        }
       } else {
-        // toast.success(res.message);
-      }
-      if (res.data.status == "success") {
-        toast.success("Success!");
+        const res = await axios.post(
+          "/api/auth/create-question",
+          {
+            title: inpTitle,
+            description: inpSubTitle,
+            options: finalOptions,
+            startDate: date,
+          },
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        await axios.post(
+          "/api/auth/save-question",
+          {
+            title: inpTitle,
+            description: inpSubTitle,
+            options: finalOptions,
+            startDate: date,
+          },
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        if (res.status !== 200) {
+          console.log(res);
+          toast.error(res.response.data.message);
+        }
+        if (res.data.status == "success") {
+          toast.success("Success!");
+        }
       }
     },
   });
@@ -144,18 +178,6 @@ const CreateQuestionForm = ({ t }) => {
           )}
         </div>
         <div>
-          {/* <input
-            type="date"
-            onChange={(e) =>
-              setTimeS(format(new Date(e.target.value), "yyyy-MM-dd"))
-            }
-          />
-          <input
-            type="date"
-            onChange={(e) =>
-              setTimeX(format(new Date(e.target.value), "yyyy-MM-dd"))
-            }
-          /> */}
           <Popover>
             <PopoverTrigger asChild>
               <Button
@@ -210,19 +232,17 @@ const CreateQuestionForm = ({ t }) => {
         <Dialog open={isOpenDialog}>
           <DialogTrigger asChild>
             <Button onClick={() => setIsOpenDialog(true)} variant="outline">
-              Add
+              {t.addB}
             </Button>
           </DialogTrigger>
           <DialogContent className="sm:max-w-[425px]">
             <DialogHeader>
-              <DialogTitle>Add option</DialogTitle>
-              <DialogDescription>
-                Click save when you re done.
-              </DialogDescription>
+              <DialogTitle>{t.addBTitle}</DialogTitle>
+              <DialogDescription>{t.addBCaption}</DialogDescription>
             </DialogHeader>
             <div>
               <div>
-                <Label>Title</Label>
+                <Label>{t.addInpTitle}</Label>
                 <Input
                   type="text"
                   value={optionData.title}
@@ -232,7 +252,7 @@ const CreateQuestionForm = ({ t }) => {
                 />
               </div>
               <div>
-                <Label>Caption</Label>
+                <Label>{t.addInpCaption}</Label>
                 <Input
                   type="text"
                   value={optionData.desc}

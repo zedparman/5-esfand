@@ -23,6 +23,11 @@ const DashboardNav = ({ t }) => {
       href: "/accounts/dashboard/questions-list",
       icon: ScrollText,
     },
+    {
+      name: t.saveQuestions,
+      href: "/accounts/dashboard/save-questions",
+      icon: ScrollText,
+    },
     { name: t.Settings, href: "/accounts/dashboard/settings", icon: Settings },
   ];
 

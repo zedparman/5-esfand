@@ -64,6 +64,7 @@
     "Settings": "Settings",
     "QuestionsList": "Question List",
     "MyQuestions": "My Question",
+    "saveQuestions": "Save Questions",
     "LogOut": "Log Out",
     "ConnectWallet": "Connect Wallet",
     "SettingsPage": {
@@ -102,7 +103,13 @@
       "inpSubRequire": "Description is required",
       "inpTitleValidateLong": "Title must be 3 or more characters long",
       "inpSubValidateLong": "Description must be 3 or more characters long",
-      "submit": "Create"
+      "submit": "Create",
+      "saveQuestion": "Would you like to save your question?",
+      "addB" : "Add Option",
+      "addBTitle": "Add",
+      "addBCaption": "Click save when you re done.",
+      "addInpTitle": "Title",
+      "addInpCaption": "Description"
     }
   },
   "QuestionsPageCom": {

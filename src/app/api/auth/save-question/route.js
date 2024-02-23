@@ -65,9 +65,9 @@ export async function POST(req, res) {
   });
   console.log(newQuestion);
 
-  await newQuestion.save();
+  // await newQuestion.save();
 
-  await user?.questions?.push(newQuestion);
+  await user?.saveQuestions?.push(newQuestion);
 
   await user.save();
 

@@ -6,6 +6,13 @@ import uniqid from "uniqid";
 
 const QuestionDetailCl = ({ res }) => {
   const { wallet } = useSelector((states) => states.globalStates);
+  
+  // Check if the selected date is in the past
+  const currentDate = new Date();
+  const selectedDate = new Date(res.data.endDate);
+
+  const isPastDate = selectedDate < currentDate;
+
   const wa = wallet;
   return (
     <section className="flex flex-col p-2">
@@ -28,6 +35,7 @@ const QuestionDetailCl = ({ res }) => {
                 // session={session}
                 wallet={wallet}
                 questionId={res.data.questionId}
+                isPastDate={isPastDate}
                 key={uniqid()}
                 {...item}
               />

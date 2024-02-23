@@ -63,7 +63,8 @@
     "CreateQuestion": "ساخت سوال",
     "Settings": "تنظیمات",
     "QuestionsList": "لیست سوالات",
-    "MyQuestions" : "لیست سوالات من",
+    "MyQuestions": "لیست سوالات من",
+    "saveQuestions": "سوالات ذخیره شده",
     "LogOut": "خروج",
     "ConnectWallet": "Connect Wallet",
     "SettingsPage": {
@@ -102,7 +103,13 @@
       "inpSubRequire": "توضیحات الزامی است",
       "inpTitleValidateLong": "عنوان حداقل باید 3 کاراکتر باشد",
       "inpSubValidateLong": "توضیحات حداقل باید 3 کاراکتر باشد",
-      "submit": "ساختن"
+      "submit": "ساختن",
+      "saveQuestion": "آیا شما دوست دارید که سوال خود را ذخیره کنید?",
+      "addB": "افزودن آپشن",
+      "addBTitle": "اضافه کردن آپشن",
+      "addBCaption": "روی دکمه save کلیک کنید وقتی کارتون تموم شد",
+      "addInpTitle": "عنوان",
+      "addInpCaption": "توضیحات"
     }
   },
   "QuestionsPageCom": {

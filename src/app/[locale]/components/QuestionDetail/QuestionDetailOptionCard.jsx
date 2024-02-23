@@ -25,6 +25,7 @@ const QuestionDetailOptionCard = ({
   wallet,
   questionId,
   count,
+  isPastDate,
 }) => {
   const router = useRouter();
 
@@ -50,7 +51,9 @@ const QuestionDetailOptionCard = ({
         <p className="text-primary-foreground w-full text-base my-5">{desc}</p>
         <div className="w-full flex flex-row-reverse justify-between items-center">
           <p>Vote Count: {count}</p>
-          <Button onClick={send}>Vote</Button>
+          <Button onClick={send} disabled={isPastDate}>
+            Vote
+          </Button>
         </div>
       </div>
     </div>

@@ -26,6 +26,11 @@ const HomePageComponent = ({ isAuth }) => {
       icon: ScrollText,
     },
     {
+      name: t.Dashboard.saveQuestions,
+      href: "/accounts/dashboard/save-questions",
+      icon: ScrollText,
+    },
+    {
       name: t.Dashboard.Settings,
       href: "/accounts/dashboard/settings",
       icon: Settings,

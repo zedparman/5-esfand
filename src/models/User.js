@@ -9,6 +9,11 @@ const userSchema = new mongoose.Schema({
     default: [],
     ref: "Question",
   },
+  saveQuestions: {
+    type: [{ type: Object }],
+    default: [],
+    ref: "Question",
+  },
 });
 
 const User = mongoose.models.User || mongoose.model("User", userSchema);
