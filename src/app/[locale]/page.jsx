@@ -1,10 +1,10 @@
-export default function Home() {
-  // const t = useTranslations("Index");
+import { useMessages } from "next-intl";
+import HomePageComponent from "./components/Home/HomePageComponent";
+import { getServerSession } from "next-auth";
 
-  return (
-    <main className="flex flex-col items-center justify-center bg-card h-[90vh]">
-      <h1 className="text-2xl font-bold text-primary">Question Area</h1>
-      {/* <h2>{t("subTitle")}</h2> */}
-    </main>
-  );
+export default async function HomePage() {
+  // const t = useTranslations("Index");
+  const session = await getServerSession();
+
+  return <HomePageComponent isAuth={session} />;
 }

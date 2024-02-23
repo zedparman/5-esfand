@@ -9,10 +9,10 @@ const getAllQuestions = async () => {
   );
   return response.data;
 };
-const QuestionsPageComponent = async ({ t }) => {
+const QuestionsPageComponent = async ({ t, subT }) => {
   const res = await getAllQuestions();
   console.log({ res });
-  return <Questionjkl res={res} t={t} />;
+  return <Questionjkl res={res} t={t} subT={subT} />;
 };
 
 export default QuestionsPageComponent;

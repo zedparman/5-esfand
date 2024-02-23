@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import QuestionCard from "./QuestionCard";
 
-const Questionjkl = ({ res, t }) => {
+const Questionjkl = ({ res, t , subT }) => {
   const [searchTerm, setSearchTerm] = useState("");
 
   const filteredData = res?.data?.filter((item) =>
@@ -10,7 +10,7 @@ const Questionjkl = ({ res, t }) => {
   );
   return (
     <section className="flex flex-col w-full items-center justify-center p-2">
-      <h1 className="text-2xl font-bold text-primary">{t.title}</h1>
+      {subT == false ? "" : <h1 className="text-2xl font-bold text-primary">{t.title}</h1>}
       <input
         type="text"
         placeholder="Search by name"
